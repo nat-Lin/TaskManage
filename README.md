@@ -73,7 +73,7 @@ server 端請使用：
 
 #### 1-2: 安裝 Rails
 
-[x] 以 gem 指令安裝 Rails
+- [x]以 gem 指令安裝 Rails
 [x] 安裝最新版本的 Rails
 [x] 以 `rails -v` 指令來確認 Rails 的版本
 

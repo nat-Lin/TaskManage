@@ -1,0 +1,9 @@
+%h1 
+  = @task.title
+%h2 
+  = "#{@task.start_time} 到 #{@task.end_time}"
+.task-content
+  = @task.notes
+.btn
+  = link_to '返回任務列表', tasks_path
+  = link_to '修改任務', edit_task_path

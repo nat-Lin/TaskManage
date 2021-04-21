@@ -1,0 +1,19 @@
+%h1 任務列表
+%table 
+  %thead 
+    %tr
+      %td 任務
+      %td 開始時間
+      %td 結束時間
+  %tbody 
+    - @tasks.each do |task|
+      %tr 
+        %td 
+          = link_to task.title, task_path(task)
+        %td 
+          = task.start_time 
+        %td 
+          = task.end_time
+        %td 
+          = link_to '刪除', task_path(task), method: 'delete', data: {confirm: '確定刪除！？'}
+= link_to '新增任務', new_task_path

@@ -2,7 +2,8 @@ class TasksController < ApplicationController
   before_action :find_task, only:[:destroy, :update, :show, :edit]
 
   def index
-    @tasks = Task.all
+    @sort = params['sort']
+    @tasks = @sort ? Task.send("#{@sort}_sort") : Task.all
   end
 
   def create
@@ -50,6 +51,6 @@ class TasksController < ApplicationController
     end
 
     def i18n_t key
-      I18n.t("tasks.controller#{key}")
+      I18n.t("#{key}", scope: 'tasks.controller')
     end
 end

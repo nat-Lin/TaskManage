@@ -11,4 +11,6 @@
 #  updated_at :datetime         not null
 #
 class Task < ApplicationRecord
+  scope :start_time_sort, -> { order(:start_time) }
+  scope :end_time_sort, -> { order(:end_time) }
 end

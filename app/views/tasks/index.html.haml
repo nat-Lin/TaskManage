@@ -1,4 +1,7 @@
 %h1 任務列表
+= link_to t('.start_time_sort'), root_path(sort: 'start_time')
+= link_to t('.end_time_sort'), root_path(sort: 'end_time')
+= link_to t('.create_time_sort'), root_path
 %table 
   %thead 
     %tr

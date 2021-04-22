@@ -30,6 +30,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 # Customization
 gem 'hamlit'
+gem 'rails-i18n', '~> 6.0.0'
 
 
 group :development, :test do

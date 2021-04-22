@@ -5,5 +5,5 @@
 .task-content
   = @task.notes
 .btn
-  = link_to '返回任務列表', tasks_path
-  = link_to '修改任務', edit_task_path
+  = link_to t('tasks.view.return_tasks_list'), tasks_path
+  = link_to t('.edit_task'), edit_task_path

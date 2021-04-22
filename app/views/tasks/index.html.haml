@@ -15,5 +15,5 @@
         %td 
           = task.end_time
         %td 
-          = link_to '刪除', task_path(task), method: 'delete', data: {confirm: '確定刪除！？'}
-= link_to '新增任務', new_task_path
+          = link_to t('.destroy_task'), task_path(task), method: 'delete', data: {confirm: t('.destroy_check_text')}
+= link_to t('.create_task'), new_task_path

@@ -9,7 +9,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     
     if @task.save
-      flash[:notice] = '新增成功'
+      flash[:notice] = i18n_t('.create_successful')
       redirect_to @task
     else
       render :new
@@ -28,7 +28,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      flash[:notice] = '修改成功'
+      flash[:notice] = i18n_t('.update_successful')
       redirect_to @task
     else
       render :edit
@@ -37,7 +37,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to tasks_path, notice: '刪除成功'
+    redirect_to tasks_path, notice: i18n_t('.destroy_successful')
   end
 
   private
@@ -47,5 +47,9 @@ class TasksController < ApplicationController
 
     def find_task
       @task = Task.find_by(id: params[:id])
+    end
+
+    def i18n_t key
+      I18n.t("tasks.controller#{key}")
     end
 end

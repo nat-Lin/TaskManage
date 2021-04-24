@@ -18,5 +18,20 @@ module TaskManage
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # setup I18n
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*', '*.{rb,yml}').to_s]
+    config.i18n.default_locale = :"zh-TW"
+    config.i18n.available_locales = [:"zh-TW"]
+
+    # setup time zone
+    config.time_zone = 'Taipei'
+
+    # load lib
+    config.eager_load_paths += Dir[Rails.root.join('lib', '**/')]
+
+    config.action_view.field_error_proc = proc do |html_tag, instance|
+      html_tag.html_safe
+    end
   end
 end

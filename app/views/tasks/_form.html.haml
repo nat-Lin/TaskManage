@@ -1,18 +1,24 @@
+- if task.errors.any?
+  %ul 
+    - task.errors.full_messages.each do |msg|
+      %li 
+        = msg
+
 = form_with model: task, local: true do |f|
   .form-group
-    = f.label :title, '任務'
+    = f.label :title, t('.name')
     = f.text_field :title
 
   .form-group
-    = f.label :notes, '備註'
+    = f.label :notes, t('.notes')
     = f.text_area :notes, cols: 40, rows: 20
 
   .form-group
-    = f.label :start_time, '開始時間'
+    = f.label :start_time, t('.start_time')
     = f.datetime_field :start_time
 
   .form-group
-    = f.label :end_time, '結束時間'
+    = f.label :end_time, t('.end_time')
     = f.datetime_field :end_time
 
-  = f.submit
+  = f.submit t(".submit.#{action_name}")

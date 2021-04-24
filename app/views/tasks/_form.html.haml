@@ -1,3 +1,9 @@
+- if task.errors.any?
+  %ul 
+    - task.errors.full_messages.each do |msg|
+      %li 
+        = msg
+
 = form_with model: task, local: true do |f|
   .form-group
     = f.label :title, t('.name')

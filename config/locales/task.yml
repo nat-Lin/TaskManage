@@ -4,6 +4,9 @@ zh-TW:
       create_successful: '新增成功'
       update_successful: '修改成功'
       destroy_successful: '刪除成功'
+    model:
+      error:
+        end_time_not_valid: '結束日期不能早於開始日期' 
     view:
       return_tasks_list: '返回任務列表'
     index:
@@ -24,6 +27,7 @@ zh-TW:
       end_time: '結束時間'
       submit:
         new: '新增任務'
+        create: '新增任務'
         edit: '送出修改'
       
       

@@ -2,8 +2,13 @@ class TasksController < ApplicationController
   before_action :find_task, only:[:destroy, :update, :show, :edit]
 
   def index
-    @sort = params['sort']
-    @tasks = @sort ? Task.send("#{@sort}_sort") : Task.all
+    @search = params['search']
+    @tasks = Task.all
+    if @search
+      @tasks = @tasks.search_status(@search['statuses']) if @search['statuses']
+      @tasks = @tasks.search_title(@search['title']) if @search['title']
+    end
+    @tasks = @tasks.field_sort(params['sort']) if params['sort']
   end
 
   def create

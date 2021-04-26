@@ -6,7 +6,12 @@ zh-TW:
       destroy_successful: '刪除成功'
     model:
       error:
-        end_time_not_valid: '結束日期不能早於開始日期' 
+        end_time_not_valid: '結束日期不能早於開始日期'
+      statuses:
+        all: '全部'
+        undone: '未完成'
+        execute: '進行中'
+        finish: '已完成'
     view:
       return_tasks_list: '返回任務列表'
     index:
@@ -25,6 +30,7 @@ zh-TW:
       notes: '備註'
       start_time: '開始時間'
       end_time: '結束時間'
+      status: '狀態'
       submit:
         new: '新增任務'
         create: '新增任務'

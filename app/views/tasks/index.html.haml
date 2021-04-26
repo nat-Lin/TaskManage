@@ -1,16 +1,24 @@
 %h1 任務列表
-= link_to t('.start_time_sort'), root_path(sort: 'start_time')
-= link_to t('.end_time_sort'), root_path(sort: 'end_time')
-= link_to t('.create_time_sort'), root_path
+= link_to t('.start_time_sort'), tasks_path(sort: 'start_time')
+= link_to t('.end_time_sort'), tasks_path(sort: 'end_time')
+= link_to t('.create_time_sort'), tasks_path(sort: 'created_at')
+.search
+  = form_with url: tasks_path, scope: 'search', remote: false, method: 'get' do |f|
+    = f.select(:statuses, option_for_statuses_for_index)
+    = f.search_field(:title, onsearch: true)
+    = f.submit
 %table 
   %thead 
     %tr
+      %td 狀態
       %td 任務
       %td 開始時間
       %td 結束時間
   %tbody 
     - @tasks.each do |task|
       %tr 
+        %td 
+          = t("tasks.model.statuses.#{task.status}")
         %td 
           = link_to task.title, task_path(task)
         %td 

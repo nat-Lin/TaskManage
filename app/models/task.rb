@@ -9,13 +9,15 @@
 #  end_time   :datetime
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  status     :integer          default(0)
+#  status     :integer          default("undone")
+#  priority   :integer          default("urgent")
 #
 
 class Task < ApplicationRecord
   include ActiveModel::Validations
 
   enum status: { undone: 0, execute: 1, finish: 2 }
+  enum priority: { urgent: 0, ordinary: 1, noturgent: 2}
 
   default_scope { order(:created_at) }
   scope :field_sort, ->(field) { order(field.to_sym) }  

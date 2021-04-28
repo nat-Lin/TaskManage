@@ -16,15 +16,16 @@ zh-TW:
         urgent: '緊急'
         ordinary: '普通'
         noturgent: '不緊急'
+      start_time_sort: '開始時間'
+      end_time_sort: '結束時間'
+      create_time_sort: '新增時間'
     view:
       return_tasks_list: '返回任務列表'
     index:
       destroy_task: '刪除'
       destroy_check_text: '確定刪除！？'
       create_task: '新增任務'
-      start_time_sort: '依照開始時間排序'
-      end_time_sort: '依照結束時間排序'
-      create_time_sort: '依照新增時間排序'
+      submit: '送出'
     edit:
       return_task: '返回任務'
     show:

@@ -2,13 +2,15 @@ class TasksController < ApplicationController
   before_action :find_task, only:[:destroy, :update, :show, :edit]
 
   def index
-    @search = params['search']
-    @tasks = Task.all
-    if @search
-      @tasks = @tasks.search_status(@search['statuses']) if @search['statuses']
-      @tasks = @tasks.search_title(@search['title']) if @search['title']
-    end
-    @tasks = @tasks.field_sort(params['sort']) if params['sort']
+    # @search = params['search']
+    # @tasks = Task.all
+    # if @search
+    #   @tasks = @tasks.search_status(@search['statuses']) if @search['statuses']
+    #   @tasks = @tasks.search_title(@search['title']) if @search['title']
+    # end
+    # @tasks = @tasks.field_sort(params['sort']) if params['sort']
+    @tasks = params[:search].nil? ? Task.all : search_tasks
+
   end
 
   def create
@@ -48,14 +50,31 @@ class TasksController < ApplicationController
 
   private
     def task_params
-      params.require(:task).permit(:title, :notes,:end_time,:start_time)
+      params.require(:task).permit(:title, :notes, :end_time, :start_time)
     end
 
     def find_task
       @task = Task.find_by(id: params[:id])
     end
 
-    def i18n_t key
+    def i18n_t(key)
       I18n.t("#{key}", scope: 'tasks.controller')
+    end
+
+    def search_params
+      params.require(:search).permit(:statuses, :sort, :title)
+    end
+
+    def search_tasks
+      task = Task.all
+      [
+        {key: search_params[:statuses], scope: :search_status},
+        {key: search_params[:title], scope: :search_title},
+        {key: search_params[:sort], scope: :field_sort}
+      ].each do |val|
+        next if val[:key].blank?
+        task = task.try(val[:scope], val[:key])
+      end
+      task
     end
 end

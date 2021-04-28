@@ -23,6 +23,6 @@
 
   .form-group
     = f.label(:status, t('.status'))
-    = f.select(:status, option_for_statuses)
+    = f.select(:status, options_for_statuses)
 
   = f.submit t(".submit.#{action_name}")

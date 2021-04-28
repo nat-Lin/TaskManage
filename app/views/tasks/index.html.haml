@@ -1,12 +1,10 @@
 %h1 任務列表
-= link_to t('.start_time_sort'), tasks_path(sort: 'start_time')
-= link_to t('.end_time_sort'), tasks_path(sort: 'end_time')
-= link_to t('.create_time_sort'), tasks_path(sort: 'created_at')
 .search
   = form_with url: tasks_path, scope: 'search', remote: false, method: 'get' do |f|
-    = f.select(:statuses, option_for_statuses_for_index)
+    = f.select(:statuses, options_for_statuses_index)
+    = f.select(:sort, options_for_sort)
     = f.search_field(:title, onsearch: true)
-    = f.submit
+    = f.submit t('.submit')
 %table 
   %thead 
     %tr

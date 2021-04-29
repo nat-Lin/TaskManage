@@ -20,12 +20,25 @@ class Task < ApplicationRecord
   enum priority: { urgent: 0, ordinary: 1, noturgent: 2}
 
   default_scope { order(created_at: :desc) }
-  scope :field_sort, ->(field) { reorder("#{field.to_sym} DESC") }  
+  scope :field_sort, ->(field) { 
+    if priorities.keys.include?(field)
+      reorder(Arel.sql(priorities_val_sort(field).map{ |num| "priority=#{num} DESC" }.join(', ')))
+    else
+      reorder("#{field.to_sym} DESC") 
+    end
+  }  
   scope :search_title, ->(keyword) { where('title LIKE ?', "%#{keyword}%") }
-  scope :search_status, ->(status) { 
-    where(status: status == 'all' ? [0, 1, 2] : statuses[status])
+  scope :search_status, ->(val) { 
+    where(status: val == 'all' ? statuses.values : statuses[val])
   }
 
   validates :title, :start_time, :end_time, presence: true
   validates_with EndTimeValidator, if: -> { end_time.present? && start_time.present? }
+
+  def self.priorities_val_sort(key)
+    key_num = priorities[key.to_sym]
+    original_sort = priorities.values
+    original_sort.delete(key_num)
+    original_sort.unshift(key_num)
+  end
 end

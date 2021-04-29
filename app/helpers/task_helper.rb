@@ -14,7 +14,13 @@ module TaskHelper
       [i18n_t_model('.start_time_sort'), 'start_time'],
       [i18n_t_model('.end_time_sort'), 'end_time'],
       [i18n_t_model('.create_time_sort'), 'created_at']
-    ]
+    ] + options_for_priorities
+  end
+
+  def options_for_priorities
+    Task.priorities.keys.map { |key|
+      [i18n_t_model(".priorities.#{key}"), key]
+    }
   end
 
   private

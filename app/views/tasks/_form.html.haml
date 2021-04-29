@@ -25,4 +25,8 @@
     = f.label(:status, t('.status'))
     = f.select(:status, options_for_statuses)
 
+  .form-group 
+    = f.label(:priority, t('.priority'))
+    = f.select(:priority, options_for_priorities)
+
   = f.submit t(".submit.#{action_name}")

@@ -12,7 +12,7 @@ zh-TW:
         undone: '未完成'
         execute: '進行中'
         finish: '已完成'
-      priority:
+      priorities:
         urgent: '緊急'
         ordinary: '普通'
         noturgent: '不緊急'
@@ -36,6 +36,7 @@ zh-TW:
       start_time: '開始時間'
       end_time: '結束時間'
       status: '狀態'
+      priority: '優先程度'
       submit:
         new: '新增任務'
         create: '新增任務'

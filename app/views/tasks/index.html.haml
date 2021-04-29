@@ -8,6 +8,7 @@
 %table 
   %thead 
     %tr
+      %td 優先程度
       %td 狀態
       %td 任務
       %td 開始時間
@@ -15,6 +16,8 @@
   %tbody 
     - @tasks.each do |task|
       %tr 
+        %td 
+          = t("tasks.model.priorities.#{task.priority}")
         %td 
           = t("tasks.model.statuses.#{task.status}")
         %td 

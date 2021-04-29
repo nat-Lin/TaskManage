@@ -2,15 +2,7 @@ class TasksController < ApplicationController
   before_action :find_task, only:[:destroy, :update, :show, :edit]
 
   def index
-    # @search = params['search']
-    # @tasks = Task.all
-    # if @search
-    #   @tasks = @tasks.search_status(@search['statuses']) if @search['statuses']
-    #   @tasks = @tasks.search_title(@search['title']) if @search['title']
-    # end
-    # @tasks = @tasks.field_sort(params['sort']) if params['sort']
     @tasks = params[:search].nil? ? Task.all : search_tasks
-
   end
 
   def create
@@ -50,7 +42,7 @@ class TasksController < ApplicationController
 
   private
     def task_params
-      params.require(:task).permit(:title, :notes, :end_time, :start_time)
+      params.require(:task).permit(:title, :notes, :end_time, :start_time, :status, :priority)
     end
 
     def find_task

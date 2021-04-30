@@ -5,6 +5,7 @@
     = f.select(:sort, options_for_sort)
     = f.search_field(:title, onsearch: true)
     = f.submit t('.submit')
+= link_to t('.create_task'), new_task_path
 %table 
   %thead 
     %tr
@@ -28,4 +29,4 @@
           = task.end_time
         %td 
           = link_to t('.destroy_task'), task_path(task), method: 'delete', data: {confirm: t('.destroy_check_text')}
-= link_to t('.create_task'), new_task_path
+= paginate(@tasks)

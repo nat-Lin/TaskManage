@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :find_task, only:[:destroy, :update, :show, :edit]
 
   def index
-    @tasks = params[:search].nil? ? Task.all : search_tasks
+    @tasks = search_tasks
   end
 
   def create
@@ -58,7 +58,8 @@ class TasksController < ApplicationController
     end
 
     def search_tasks
-      task = Task.all
+      task = Task.all.page(params[:page])
+      return task if params[:search].nil?
       [
         {key: search_params[:statuses], scope: :search_status},
         {key: search_params[:title], scope: :search_title},

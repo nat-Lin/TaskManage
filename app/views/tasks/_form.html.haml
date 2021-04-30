@@ -6,19 +6,27 @@
 
 = form_with model: task, local: true do |f|
   .form-group
-    = f.label :title, t('.name')
-    = f.text_field :title
+    = f.label(:title, t('.name'))
+    = f.text_field(:title)
 
   .form-group
-    = f.label :notes, t('.notes')
-    = f.text_area :notes, cols: 40, rows: 20
+    = f.label(:notes, t('.notes'))
+    = f.text_area(:notes, cols: 40, rows: 20)
 
   .form-group
-    = f.label :start_time, t('.start_time')
-    = f.datetime_field :start_time
+    = f.label(:start_time, t('.start_time'))
+    = f.datetime_field(:start_time)
 
   .form-group
-    = f.label :end_time, t('.end_time')
-    = f.datetime_field :end_time
+    = f.label(:end_time, t('.end_time'))
+    = f.datetime_field(:end_time)
+
+  .form-group
+    = f.label(:status, t('.status'))
+    = f.select(:status, options_for_statuses)
+
+  .form-group 
+    = f.label(:priority, t('.priority'))
+    = f.select(:priority, options_for_priorities)
 
   = f.submit t(".submit.#{action_name}")

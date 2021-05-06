@@ -30,8 +30,9 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 # Customization
 gem 'hamlit'
+gem 'html2haml', '~> 2.2'
 gem 'rails-i18n', '~> 6.0.0'
-gem 'kaminari'
+gem 'kaminari', '~> 1.2.1'
 
 
 group :development, :test do

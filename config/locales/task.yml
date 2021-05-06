@@ -25,7 +25,7 @@ zh-TW:
       destroy_task: '刪除'
       destroy_check_text: '確定刪除！？'
       create_task: '新增任務'
-      submit: '送出'
+      submit: '搜尋'
     edit:
       return_task: '返回任務'
     show:

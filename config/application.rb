@@ -31,7 +31,11 @@ module TaskManage
     config.eager_load_paths += Dir[Rails.root.join('lib', '**/')]
 
     config.action_view.field_error_proc = proc do |html_tag, instance|
-      html_tag.html_safe
+      if html_tag.include?('input')
+        html_tag += %{<div class="invalid-feedback">#{instance.error_message.join(', ')}</div>}.html_safe
+      end
+      html_tag.gsub("form-control", "form-control is-invalid").html_safe
+
     end
   end
 end

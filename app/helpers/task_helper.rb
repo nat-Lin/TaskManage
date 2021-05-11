@@ -14,9 +14,9 @@ module TaskHelper
 
   def options_for_sort
     options = [
-      [i18n_t_model('.start_time_sort'), 'start_time'],
-      [i18n_t_model('.end_time_sort'), 'end_time'],
-      [i18n_t_model('.create_time_sort'), 'created_at']
+      [Task.human_attribute_name(:start_time), 'start_time'],
+      [Task.human_attribute_name(:end_time), 'end_time'],
+      [Task.human_attribute_name(:created_at), 'created_at']
     ] + options_for_priorities
 
     options_for_select(options, options_default(:sort))

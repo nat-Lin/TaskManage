@@ -1,4 +1,16 @@
 zh-TW:
+  activerecord:
+    models:
+      task: '任務'
+    attributes:
+      task:
+        title: '任務'
+        notes: '備註'
+        start_time: '開始時間'
+        end_time: '結束時間'
+        created_at: '新增時間'
+        statuses: '狀態'
+        priorities: '優先程度'
   tasks:
     controller:
       create_successful: '新增成功'
@@ -16,9 +28,6 @@ zh-TW:
         urgent: '緊急'
         ordinary: '普通'
         noturgent: '不緊急'
-      start_time_sort: '開始時間'
-      end_time_sort: '結束時間'
-      create_time_sort: '新增時間'
     view:
       return_tasks_list: '返回任務列表'
     index:

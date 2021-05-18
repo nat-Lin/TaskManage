@@ -58,7 +58,7 @@ class TasksController < ApplicationController
     end
 
     def search_tasks
-      task = Task.all.page(params[:page])
+      task = current_user.tasks.page(params[:page])
       return task if params[:search].nil?
       [
         {key: search_params[:statuses], scope: :search_status},

@@ -11,6 +11,7 @@
 #  updated_at :datetime         not null
 #  status     :integer          default("undone")
 #  priority   :integer          default("urgent")
+#  user_id    :bigint
 #
 
 class Task < ApplicationRecord
@@ -34,6 +35,8 @@ class Task < ApplicationRecord
 
   validates :title, :start_time, :end_time, presence: true
   validates_with EndTimeValidator, if: -> { end_time.present? && start_time.present? }
+
+  belongs_to :user
 
   def self.priorities_val_sort(key)
     key_num = priorities[key.to_sym]

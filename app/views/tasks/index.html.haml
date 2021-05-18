@@ -29,5 +29,5 @@
         %td 
           = time_format(task.end_time)
         %td 
-          = link_to t('.destroy_task'), task_path(task), method: 'delete', data: {confirm: t('.destroy_check_text')}, class: 'btn btn-danger btn-sm'
+          = link_to t('.destroy_task'), task_path(task), method: :delete, data: {confirm: t('.destroy_check_text')}, class: 'btn btn-danger btn-sm'
 = paginate(@tasks)

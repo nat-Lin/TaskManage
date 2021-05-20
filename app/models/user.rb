@@ -14,5 +14,5 @@ class User < ApplicationRecord
   has_secure_password
   has_many :tasks
 
-  enum role: { user: 0, admin: 1, superadmin: 2 }
+  enum role: { user: 0, admin: 1 }
 end

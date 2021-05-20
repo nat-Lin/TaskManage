@@ -6,7 +6,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.new(task_params)
     
     if @task.save
       flash[:notice] = i18n_t('.create_successful')
@@ -46,7 +46,7 @@ class TasksController < ApplicationController
     end
 
     def find_task
-      @task = Task.find_by(id: params[:id])
+      @task = current_user.tasks.find_by_id(params[:id])
     end
 
     def i18n_t(key)

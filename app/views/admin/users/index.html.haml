@@ -1,5 +1,6 @@
 %h1.text-center.mt-3 使用者列表
--# .search.d-flex.justify-content-between.mt-3
+.search.d-flex.justify-content-between.mt-3
+  = link_to '新增使用者', new_register_path, class: 'btn btn-outline-secondary'
 %table.table.table-striped.text-center.mt-1
   %thead.thead-dark
     %tr
@@ -15,7 +16,9 @@
         %td 
           = user.name
         %td 
-          = user.role
+          = form_with model: user, url: register_path(user), local: true do |f|
+            = f.select(:role, options_for_roles, {}, class: 'custom-select w-auto')
+            = f.submit('更新', class: 'btn btn-outline-secondary')
         %td
-          = link_to '刪除', register_path(user), method: :deletem, data: {confirm: '確定是否刪除使用者？'}, class: 'btn btn-danger btn-sm'
+          = link_to '刪除', register_path(user), method: :delete, data: {confirm: '確定是否刪除使用者？'}, class: 'btn btn-danger'
     

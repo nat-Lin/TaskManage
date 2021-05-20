@@ -1,5 +1,9 @@
 .navbar.navbar-expand-lg.navbar-dark.bg-dark
   = link_to '任務管理系統', root_path, class: 'navbar-brand'
+  - if current_user.try('admin?')
+    .navbar-nav
+      .nav-item
+        = link_to '管理者', admin_root_path, class: 'nav-link'
   .collapse.navbar-collapse.flex-row-reverse
     .navbar-nav
       = display_login_or_logout

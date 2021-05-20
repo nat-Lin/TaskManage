@@ -18,7 +18,7 @@ class Task < ApplicationRecord
   include ActiveModel::Validations
 
   enum status: { undone: 0, execute: 1, finish: 2 }
-  enum priority: { urgent: 0, ordinary: 1, noturgent: 2}
+  enum priority: { urgent: 0, ordinary: 1, noturgent: 2 }
 
   default_scope { order(created_at: :desc) }
   scope :field_sort, ->(field) { 

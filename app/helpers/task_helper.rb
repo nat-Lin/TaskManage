@@ -28,10 +28,6 @@ module TaskHelper
     }
   end
 
-  def time_format(time)
-    time.strftime("%Y/%m/%d %H:%M:%S")
-  end
-
   def options_default(obj_name)
     search = params[:search]
     search && search[obj_name] 

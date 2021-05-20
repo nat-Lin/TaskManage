@@ -14,4 +14,8 @@ module ApplicationHelper
       link_to('登入', new_session_path, class: 'nav-link')
     end
   end
+
+  def time_format(time)
+    time.strftime("%Y/%m/%d %H:%M:%S")
+  end
 end

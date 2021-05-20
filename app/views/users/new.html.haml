@@ -3,7 +3,7 @@
     %h1.card-title.mb-3.p-2 註冊帳號
     .dropdown-divider
     .card-content
-      = form_with model: @user, url: register_path, local: true do |f|
+      = form_with model: @user, url: registers_path, local: true do |f|
         .form-group
           = f.label(:name, User.human_attribute_name(:name))
           = f.text_field(:name, class: 'form-control')

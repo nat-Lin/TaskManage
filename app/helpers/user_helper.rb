@@ -1,6 +1,6 @@
 module UserHelper
   def display_come_back_to_admin_root
-    if current_user.admin?
+    if current_user.try('admin?')
       link_to '使用者管理', admin_root_path, class: 'btn btn-outline-secondary mx-1'
     end
   end

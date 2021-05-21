@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:notice] = '註冊成功'
-      redirect_to new_session_path
+      redirect_to current_user.try('admin?') ? admin_root_path : new_session_path
     else
       render :new
     end

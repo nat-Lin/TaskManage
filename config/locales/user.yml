@@ -7,6 +7,14 @@ zh-TW:
         name: '使用者帳號'
         password: '使用者密碼'
         password_confirmation: '再次確認密碼'
+    errors:
+      messages:
+        destroy: '刪除失敗，已經是最後一位使用者'
   users:
+    controller:
+      create_successful: '註冊成功'
+      update_successful: '更新成功'
+      destroy_successful: '刪除成功'
+      same_user_error: '無法操作本帳號'
     new:
       submit: '註冊帳號'

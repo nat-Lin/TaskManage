@@ -10,9 +10,18 @@
 #  role            :integer          default("user")
 #
 class User < ApplicationRecord
+  before_destroy :verify_last_user
+
   validates :name, presence: true, uniqueness: true
   has_secure_password
   has_many :tasks
 
   enum role: { user: 0, admin: 1 }
+
+  def verify_last_user
+    if User.count == 1
+      errors.add(:destroy, I18n.t('activerecord.errors.messages.destroy'))
+      throw(:abort)
+    end
+  end
 end

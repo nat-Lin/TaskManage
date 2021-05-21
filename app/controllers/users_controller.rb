@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   skip_before_action :authorize, only: [:new, :create]
   before_action :find_user, only: [:update, :destroy]
-  before_action :verify_user_admin, only: [:update, :destroy]
+  before_action :verify_user, only: [:update, :destroy]
 
   def new
     @user = User.new
@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      flash[:notice] = '註冊成功'
+      flash[:notice] = i18n_t('.create_successful')
       redirect_to current_user.try('admin?') ? admin_root_path : new_session_path
     else
       render :new
@@ -20,20 +20,15 @@ class UsersController < ApplicationController
 
   def update
     update_params = params.require(:user).permit(:role)
-    if @user.update(update_params)
-      flash[:notice] = '更新成功'
-      redirect_to admin_root_path
-    else
-      flash[:error] = '更新失敗'
-      redirect_to admin_root_path
-    end
+    @user.update(update_params) ? flash[:notice] = i18n_t('.update_successful') : flash[:error] = @user.errors[:role].join(',')
+    redirect_to admin_root_path
   end
 
   def destroy
-    @user.destroy
-    flash[:notice] = '刪除成功'
+    @user.destroy ? flash[:notice] = i18n_t('.destroy_successful') : flash[:error] = @user.errors[:destroy].join(',')
     redirect_to admin_root_path
   end
+
   private
     def user_params
       params.require(:user).permit(:name, :password, :password_confirmation)
@@ -43,13 +38,15 @@ class UsersController < ApplicationController
       @user = User.find_by_id(params[:id])
     end
 
-    def verify_user_admin
-      if !current_user.admin?
-        flash[:error] = '權限不足，無法進行操作'
-        redirect_to root_path 
-      elsif current_user == @user
-        flash[:error] = '無法操作本帳號'
+    def verify_user
+      authorize_adimin
+      if current_user == @user
+        flash[:error] = i18n_t('.same_user_error')
         redirect_to admin_root_path
       end
+    end
+
+    def i18n_t(key)
+      I18n.t("#{key}", scope: 'users.controller')
     end
 end

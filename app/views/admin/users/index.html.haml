@@ -6,6 +6,7 @@
     %tr
       %th 創建時間
       %th 使用者帳號
+      %th 使用者任務數量
       %th 使用者權限
       %th{colspan: 1} 
   %tbody 
@@ -14,11 +15,14 @@
         %td 
           = time_format(user.created_at)
         %td 
-          = user.name
+          = link_to user.name, admin_user_path(user), class: 'text-decoration-none'
+        %td
+          = user.tasks.count 
         %td 
           = form_with model: user, url: register_path(user), local: true do |f|
             = f.select(:role, options_for_roles, {}, class: 'custom-select w-auto')
             = f.submit('更新', class: 'btn btn-outline-secondary')
         %td
           = link_to '刪除', register_path(user), method: :delete, data: {confirm: '確定是否刪除使用者？'}, class: 'btn btn-danger'
+= paginate(@users)
     

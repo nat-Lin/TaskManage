@@ -1,0 +1,24 @@
+%h1.text-center.mt-3 Tag 列表
+.new-tags.d-flex.justify-content-between.my-2
+  = form_with model: @tag, local: true, class: 'form-inline' do |f|
+    .form-group
+      = f.label(:name, 'Tag :', class: 'mx-2')
+      = f.text_field(:name, class: 'form-control')
+    = f.submit '新增', class: 'btn btn-outline-secondary mx-1'
+%table.table.table-striped.text-center.mt-1
+  %thead.thead-dark 
+    %tr 
+      %th Tag
+      %th 任務數量
+      %th{colspan: 1}
+  %tboby 
+    - @tags.each do |tag|
+      %tr 
+        %td 
+          = form_with model: tag, local: true, class: 'form-inline justify-content-center' do |f|
+            = f.text_field(:name, class: 'form-control')
+            = f.submit '修改', class: 'btn btn-outline-secondary mx-1'
+        %td 
+          = 'xx'
+        %td 
+          = link_to '刪除', tag_path(tag), method: :delete, data: {confirm: '是否刪除 tag !?'}, class: 'btn btn-danger btm-sm'

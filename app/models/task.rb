@@ -3,7 +3,7 @@
 # Table name: tasks
 #
 #  id         :bigint           not null, primary key
-#  title      :string
+#  title      :string(50)       not null
 #  notes      :text
 #  start_time :datetime
 #  end_time   :datetime
@@ -34,6 +34,7 @@ class Task < ApplicationRecord
   }
 
   validates :title, :start_time, :end_time, presence: true
+  validates :title, length: {maximum: 50}
   validates_with EndTimeValidator, if: -> { end_time.present? && start_time.present? }
 
   belongs_to :user

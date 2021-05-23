@@ -1,0 +1,11 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+$dropdown-bg: $dark;
+$dropdown-border-color: $dark;
+$dropdown-link-color: $light;
+$dropdown-link-hover-bg: $gray-500;
+$dropdown-link-active-bg: $gray-900;
+
+@import "~bootstrap/scss/bootstrap";

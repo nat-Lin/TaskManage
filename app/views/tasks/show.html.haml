@@ -1,5 +1,9 @@
 .card.mt-3
   .card-body
+    %h5.tag.p-2 
+      - @task.tags.each do |tag|
+        .badge.badge-pill.badge-warning.mx-1
+          = tag.name
     %h1.card-title.p-2
       = @task.title
     %h2.card-subtitle.mb-3.p-2 

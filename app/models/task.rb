@@ -38,6 +38,8 @@ class Task < ApplicationRecord
   validates_with EndTimeValidator, if: -> { end_time.present? && start_time.present? }
 
   belongs_to :user
+  has_many :task_tags
+  has_many :tags, through: :task_tags
 
   def self.priorities_val_sort(key)
     key_num = priorities[key.to_sym]

@@ -18,7 +18,7 @@
           = form_with model: tag, local: true, class: 'form-inline justify-content-center' do |f|
             = f.text_field(:name, class: 'form-control')
             = f.submit '修改', class: 'btn btn-outline-secondary mx-1'
-        %td 
-          = 'xx'
+        %td.align-middle
+          = tag.tasks.count
         %td 
           = link_to '刪除', tag_path(tag), method: :delete, data: {confirm: '是否刪除 tag !?'}, class: 'btn btn-danger btm-sm'

@@ -1,4 +1,11 @@
 = form_with model: task, local: true do |f|
+  .form-group 
+    %p.mb-1 Tag
+    = f.collection_check_boxes(:tag_ids, current_user.tags, :id, :name) do |tag|
+      .form-check.form-check-inline
+        = tag.check_box(class: 'form-check-input')
+        = tag.label(class: 'form-check-label')
+
   .form-group
     = f.label(:title, t('.name'))
     = f.text_field(:title, class: 'form-control')

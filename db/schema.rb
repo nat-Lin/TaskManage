@@ -10,16 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_23_145303) do
+ActiveRecord::Schema.define(version: 2021_05_25_042745) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "tags", force: :cascade do |t|
     t.string "name", limit: 20, null: false
-    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_tags_on_user_id"
   end
 
@@ -57,5 +57,6 @@ ActiveRecord::Schema.define(version: 2021_05_23_145303) do
 
   add_foreign_key "task_tags", "tags"
   add_foreign_key "task_tags", "tasks"
+  add_foreign_key "tags", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "tasks", "users", on_update: :cascade, on_delete: :cascade
 end

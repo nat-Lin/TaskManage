@@ -14,8 +14,8 @@ class User < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true, length: {maximum: 50}
   has_secure_password
-  has_many :tasks, dependent: :delete_all
-  has_many :tags, dependent: :delete_all
+  has_many :tasks, dependent: :destroy
+  has_many :tags, dependent: :destroy
 
   enum role: { user: 0, admin: 1 }
 

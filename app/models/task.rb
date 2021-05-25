@@ -39,7 +39,7 @@ class Task < ApplicationRecord
 
   belongs_to :user
   has_many :task_tags
-  has_many :tags, through: :task_tags
+  has_many :tags, through: :task_tags, dependent: :destroy
 
   def self.priorities_val_sort(key)
     key_num = priorities[key.to_sym]

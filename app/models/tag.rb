@@ -9,7 +9,7 @@
 #  updated_at :datetime         not null
 #
 class Tag < ApplicationRecord
-  validates :name, presence: true, length: {maximum: 20}
+  validates :name, uniqueness: { scope: :user_id }, presence: true, length: {maximum: 20}
   belongs_to :user
   has_many :task_tags
   has_many :tasks, through: :task_tags, dependent: :destroy

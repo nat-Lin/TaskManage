@@ -54,7 +54,7 @@ class TasksController < ApplicationController
     end
 
     def search_params
-      params.require(:search).permit(:statuses, :sort, :title)
+      params.require(:search).permit(:statuses, :sort, :title, :tag)
     end
 
     def search_tasks
@@ -63,7 +63,8 @@ class TasksController < ApplicationController
       [
         {key: search_params[:statuses], scope: :search_status},
         {key: search_params[:title], scope: :search_title},
-        {key: search_params[:sort], scope: :field_sort}
+        {key: search_params[:sort], scope: :field_sort},
+        {key: search_params[:tag], scope: :search_tag}
       ].each do |val|
         next if val[:key].blank?
         task = task.try(val[:scope], val[:key])

@@ -28,6 +28,12 @@ module TaskHelper
     }
   end
 
+  def options_for_tag
+    current_user.tags.map { |tag|
+      [tag.name, tag.name]
+    }
+  end
+
   def options_default(obj_name)
     search = params[:search]
     search && search[obj_name] 

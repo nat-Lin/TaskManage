@@ -32,6 +32,7 @@ class Task < ApplicationRecord
   scope :search_status, ->(val) { 
     where(status: val == 'all' ? statuses.values : statuses[val])
   }
+  scope :search_tag, ->(keyword) { joins(:tags).where('tags.name LIKE ?', keyword)}
 
   validates :title, :start_time, :end_time, presence: true
   validates :title, length: {maximum: 50}

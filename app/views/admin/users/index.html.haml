@@ -23,6 +23,7 @@
             = f.select(:role, options_for_roles, {}, class: 'custom-select w-auto')
             = f.submit('更新', class: 'btn btn-outline-secondary')
         %td
-          = link_to '刪除', register_path(user), method: :delete, data: {confirm: '確定是否刪除使用者？(該使用者創建的任務也會同時刪除！！！)'}, class: 'btn btn-danger'
+          - unless current_user == user
+            = link_to '刪除', register_path(user), method: :delete, data: {confirm: '確定是否刪除使用者？(該使用者創建的任務也會同時刪除！！！)'}, class: 'btn btn-danger'
 = paginate(@users)
     

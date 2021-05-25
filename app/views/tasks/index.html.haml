@@ -3,6 +3,7 @@
   = form_with url: tasks_path, scope: 'search', remote: false, method: 'get', class: 'form-inline' do |f|
     = f.select(:statuses, options_for_statuses_index, {prompt: '選擇狀態'}, class: 'custom-select mr-1')
     = f.select(:sort, options_for_sort, {prompt: '排列順序'}, class: 'custom-select mr-1')
+    = f.select(:tag, options_for_tag, {prompt: 'Tag'}, class: 'custom-select mr-1')
     = f.search_field(:title, onsearch: true, class: 'form-control mr-1')
     = f.submit(t('.submit'), class: 'btn btn-outline-secondary')
   = link_to t('.create_task'), new_task_path, class: 'btn btn-outline-secondary'

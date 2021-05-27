@@ -10,6 +10,8 @@ module TaskManage
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
+    config.exceptions_app = self.routes
+    # config.autoloader = :classic
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -37,5 +39,6 @@ module TaskManage
       html_tag.gsub("form-control", "form-control is-invalid").html_safe
 
     end
+
   end
 end

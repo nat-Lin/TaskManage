@@ -1,0 +1,10 @@
+zh-TW:
+  errors:
+    not_found:
+      message: '很抱歉，搜尋不到相關內容'
+    unacceptable:
+      message: '很抱歉，所輸入的資料有誤無法處理'
+    internal_server_error: 
+      message: '伺服器發生錯誤，工程師們正在努力搶修中'
+    public:
+      contact: '如有任何問題，請聯絡系統管理員' 

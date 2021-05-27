@@ -9,3 +9,7 @@ $dropdown-link-hover-bg: $gray-500;
 $dropdown-link-active-bg: $gray-900;
 
 @import "~bootstrap/scss/bootstrap";
+
+.text-gray-800 {
+  color: $gray-800;
+};

@@ -1,4 +1,8 @@
 zh-TW:
   sessions:
+    controllers:
+      create_successful: "歡迎回來 %{user}"
+      create_failed: '登入失敗，請再次嘗試'
+      destroy_successful: '使用者登出成功'
     new:
       submit: '登入'

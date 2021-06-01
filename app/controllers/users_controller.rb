@@ -47,6 +47,6 @@ class UsersController < ApplicationController
     end
 
     def i18n_t(key)
-      I18n.t("#{key}", scope: 'users.controller')
+      I18n.t(key, scope: 'users.controllers')
     end
 end

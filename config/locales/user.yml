@@ -11,7 +11,7 @@ zh-TW:
       messages:
         destroy: '刪除失敗，已經是最後一位使用者'
   users:
-    controller:
+    controllers:
       create_successful: '註冊成功'
       update_successful: '更新成功'
       destroy_successful: '刪除成功'

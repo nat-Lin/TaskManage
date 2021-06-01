@@ -15,4 +15,12 @@ zh-TW:
       next: "下一頁 &rsaquo;"
       previous: "&lsaquo; 上一頁"
       truncate: "&hellip;"
+  layouts:
+    navbar:
+      logo_name: '任務管理'
+      admin_mode: '管理者模式'
+      tag_manage: 'Tag 管理'
+      sign_out: '登出'
+      sign_in: '登入'
+      sign_up: '註冊'
   

@@ -72,4 +72,5 @@ RSpec.configure do |config|
   config.include ActionView::Helpers::TranslationHelper
   # include FactoryBot
   config.include FactoryBot::Syntax::Methods
+  Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 end

@@ -1,13 +1,13 @@
-require_relative "base"
+require_relative 'base'
 
 module PageObjects
   class UserPage < Base
-    def run_sign_up(name: 'rspec_test', password: 'password', password_conf: 'password')
+    def run_sign_up(user_object, password_conf: nil)
       visit 'registers/new'
       within('#user_sign_up') do 
-        fill_in User.human_attribute_name(:name), with: name
-        fill_in User.human_attribute_name(:password), with: password
-        fill_in User.human_attribute_name(:password_confirmation), with: password_conf
+        fill_in User.human_attribute_name(:name), with: user_object.name
+        fill_in User.human_attribute_name(:password), with: user_object.password
+        fill_in User.human_attribute_name(:password_confirmation), with: password_conf||user_object.password
       end
       click_button t('users.new.submit')
     end

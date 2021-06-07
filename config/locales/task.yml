@@ -31,6 +31,10 @@ zh-TW:
     view:
       return_tasks_list: '返回任務列表'
     index:
+      title: '任務列表'
+      statuses_default: '選擇狀態'
+      sort_default: '排列順序'
+      tag_default: 'Tag'
       destroy_task: '刪除'
       destroy_check_text: '確定刪除！？'
       create_task: '新增任務'
@@ -43,12 +47,6 @@ zh-TW:
     new:
       title: '新增任務'
     form:
-      name: '任務'
-      notes: '備註'
-      start_time: '開始時間'
-      end_time: '結束時間'
-      status: '狀態'
-      priority: '優先程度'
       submit:
         new: '新增任務'
         create: '新增任務'

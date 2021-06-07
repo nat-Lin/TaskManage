@@ -1,4 +1,4 @@
-= form_with model: task, local: true do |f|
+= form_with model: task, local: true, id: "#{action_name}_task" do |f|
   .form-group 
     %p.mb-1 Tag
     = f.collection_check_boxes(:tag_ids, current_user.tags, :id, :name) do |tag|
@@ -7,28 +7,28 @@
         = tag.label(class: 'form-check-label')
 
   .form-group
-    = f.label(:title, t('.name'))
+    = f.label(:title, Task.human_attribute_name(:title))
     = f.text_field(:title, class: 'form-control')
 
   .form-group
-    = f.label(:notes, t('.notes'))
+    = f.label(:notes, Task.human_attribute_name(:notes))
     = f.text_area(:notes, rows: 4, class: 'form-control')
 
   .form-group
-    = f.label(:start_time, t('.start_time'))
+    = f.label(:start_time, Task.human_attribute_name(:start_time))
     = f.datetime_field(:start_time, class: 'form-control')
 
   .form-group
-    = f.label(:end_time, t('.end_time'))
+    = f.label(:end_time, Task.human_attribute_name(:end_time))
     = f.datetime_field(:end_time, class: 'form-control')
 
   .form-row
     .form-group.col-6
-      = f.label(:status, t('.status'))
+      = f.label(:status, Task.human_attribute_name(:statuses))
       = f.select(:status, options_for_statuses, {}, class: 'form-control')
 
     .form-group.col-6
-      = f.label(:priority, t('.priority'))
+      = f.label(:priority, Task.human_attribute_name(:priorities))
       = f.select(:priority, options_for_priorities, {}, class: 'form-control')
 
   .d-flex.justify-content-center.p-2

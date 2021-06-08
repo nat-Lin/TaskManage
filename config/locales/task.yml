@@ -40,7 +40,7 @@ zh-TW:
       create_task: '新增任務'
       submit: '搜尋'
     edit:
-      title: '修改任務'
+      title: '編輯任務'
       return_task: '返回任務'
     show:
       edit_task: '修改任務'
@@ -51,5 +51,6 @@ zh-TW:
         new: '新增任務'
         create: '新增任務'
         edit: '送出修改'
+        update: '送出修改'
       
       

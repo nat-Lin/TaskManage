@@ -32,6 +32,8 @@ RSpec.feature 'TaskProcesses', type: :feature do
       @task_page.run_create_task(build(:task, :empty))
       expect(page).to have_current_path tasks_path
       expect(page).to have_content t('tasks.new.title')
+      expect(page).to have_button t('tasks.form.submit.create')
+      expect(page).to have_link(t('tasks.view.return_tasks_list'), href: tasks_path)
     end
 
     scenario '任務標題、開始時間及結束時間欄位空白時應顯示錯誤訊息' do
@@ -90,7 +92,6 @@ RSpec.feature 'TaskProcesses', type: :feature do
   end
 
   describe '任務搜索' do
-    
   end
 
   describe '任務修改' do 
@@ -110,12 +111,6 @@ RSpec.feature 'TaskProcesses', type: :feature do
 
     scenario '編輯任務頁面應有當前編輯任務內容' do
       visit edit_task_path(task)
-      # expect(page).to have_field(Task.human_attribute_name(:title), with: task.title)
-      # expect(page).to have_field(Task.human_attribute_name(:notes), with: task.notes)
-      # expect(page).to have_field(Task.human_attribute_name(:start_time), with: task.start_time.strftime('%FT%T'))
-      # expect(page).to have_field(Task.human_attribute_name(:end_time), with: task.end_time.strftime('%FT%T'))
-      # expect(page).to have_select(Task.human_attribute_name(:statuses), selected: t("tasks.model.statuses.#{task.status}"))
-      # expect(page).to have_select(Task.human_attribute_name(:priorities), selected: t("tasks.model.priorities.#{task.priority}"))
       @task_page.form_elements.each do |element|
         field = element[:field]
         expect_obj = 
@@ -131,27 +126,39 @@ RSpec.feature 'TaskProcesses', type: :feature do
     end
 
     scenario '更新任務成功後應在詳細任務頁面顯示更新成功訊息' do
-      
+      @task_page.run_edit_task(task, build(:task, user: @user))
+      expect(page).to have_current_path task_path(task)
+      expect(page).to have_content t('tasks.controller.update_successful')
     end
 
     scenario '更新任務失敗後應返回編輯頁面並使用 edit 頁面渲染' do
-    
+      @task_page.run_edit_task(task, build(:task, :empty, user: @user))
+      expect(page).to have_current_path task_path(task)
+      expect(page).to have_content t('tasks.edit.title')
+      expect(page).to have_button t('tasks.form.submit.update')
+      expect(page).to have_link(t('tasks.edit.return_task'), href: task_path(task))
     end
 
     scenario '修改任務標題、開始時間及結束時間為空白時應顯示錯誤訊息' do
-      
+      @task_page.run_edit_task(task, build(:task, :empty, user: @user))
+      expect(page).to have_content t('errors.messages.blank'), count: 3
     end
 
     scenario '修改任務標題字數超過限制字數應顯示錯誤訊息' do
-    
+      @task_page.run_edit_task(task, build(:task, :long_title))
+      expect(page).to have_content t('errors.messages.too_long', count: 50)
     end
 
     scenario '修改開始時間及結束時間為不合理時應顯示錯誤訊息' do
-    
+      @task_page.run_edit_task(task, build(:task, :unreasonable))
+      expect(page).to have_content t('tasks.model.error.end_time_not_valid')
     end
 
     scenario '從編輯任務頁面按下返回任務應返回詳細任務頁面' do
-      
+      visit edit_task_path(task)
+      click_link t('tasks.edit.return_task')
+      expect(page).to have_current_path task_path(task)
+      expect(page).to have_content task.title
     end
   end
  

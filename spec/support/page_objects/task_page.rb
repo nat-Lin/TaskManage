@@ -34,13 +34,21 @@ module PageObjects
 
     def run_create_task(task_object)
       visit 'tasks/new'
-      within('#new_task') do
-        fill_in Task.human_attribute_name(:title), with: task_object.title
-        fill_in Task.human_attribute_name(:start_time), with: task_object.start_time
-        fill_in Task.human_attribute_name(:end_time), with: task_object.end_time
-      end
+      within('#new_task') { fill_in_task(task_object) }
       click_button t('tasks.form.submit.new')
     end
 
+    def run_edit_task(task_object, test_task_object)
+      visit edit_task_path(task_object)
+      within('#edit_task') { fill_in_task(test_task_object) }
+      click_button t('tasks.form.submit.edit')
+    end
+
+    private
+      def fill_in_task(task)
+        fill_in Task.human_attribute_name(:title), with: task.title
+        fill_in Task.human_attribute_name(:start_time), with: task.start_time
+        fill_in Task.human_attribute_name(:end_time), with: task.end_time
+      end
   end
 end

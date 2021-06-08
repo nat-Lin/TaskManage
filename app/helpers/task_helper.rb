@@ -40,10 +40,10 @@ module TaskHelper
   end
 
   def form_come_back_link(task = nil)
-    if action_name != 'edit'
-      link_to t('tasks.view.return_tasks_list'), tasks_path, class: 'btn btn-outline-secondary mx-1'
-    else
+    if ['edit', 'update'].include? action_name 
       link_to t('tasks.edit.return_task'), task_path(task), class: 'btn btn-outline-secondary mx-1'
+    else
+      link_to t('tasks.view.return_tasks_list'), tasks_path, class: 'btn btn-outline-secondary mx-1'
     end
   end
 

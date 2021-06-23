@@ -1,9 +1,16 @@
-%h1 
-  = @task.title
-%h2 
-  = "#{@task.start_time} 到 #{@task.end_time}"
-.task-content
-  = @task.notes
-.btn
-  = link_to t('tasks.view.return_tasks_list'), tasks_path
-  = link_to t('.edit_task'), edit_task_path
+.card.mt-3
+  .card-body
+    %h5.tag.p-2 
+      - @task.tags.each do |tag|
+        .badge.badge-pill.badge-warning.mx-1
+          = tag.name
+    %h1.card-title.p-2
+      = @task.title
+    %h2.card-subtitle.mb-3.p-2 
+      = "#{time_format(@task.start_time)} - #{time_format(@task.end_time)}"
+    %p.card-text.p-3 
+      = @task.notes
+  .dropdown-divider
+  .card-foot.d-flex.justify-content-center.p-2
+    = link_to t('tasks.view.return_tasks_list'), tasks_path, class: 'btn btn-outline-secondary mx-1'
+    = link_to t('.edit_task'), edit_task_path, class: 'btn btn-outline-secondary mx-1'

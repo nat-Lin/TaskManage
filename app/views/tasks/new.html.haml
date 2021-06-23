@@ -1,3 +1,8 @@
-%h1 新增任務
-= render 'form', task: @task
-= link_to t('tasks.view.return_tasks_list'), tasks_path
+.card.mt-3 
+  .card-body 
+    %h1.card-title.mb-3.p-2 
+      = t('.title')
+    .dropdown-divider
+    .card-content
+      = render 'form', task:@task
+    

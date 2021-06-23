@@ -1,18 +1,21 @@
-%h1 任務列表
-.search
-  = form_with url: tasks_path, scope: 'search', remote: false, method: 'get' do |f|
-    = f.select(:statuses, options_for_statuses_index)
-    = f.select(:sort, options_for_sort)
-    = f.search_field(:title, onsearch: true)
-    = f.submit t('.submit')
-%table 
-  %thead 
+%h1.text-center.mt-3= t('.title')
+.search.d-flex.justify-content-between.my-2
+  = form_with url: tasks_path, scope: 'search', remote: false, method: 'get', class: 'form-inline' do |f|
+    = f.select(:statuses, options_for_statuses_index, {prompt: t('.statuses_default')}, class: 'custom-select mr-1')
+    = f.select(:sort, options_for_sort, {prompt: t('.sort_default')}, class: 'custom-select mr-1')
+    = f.select(:tag, options_for_tag, {prompt: t('.tag_default')}, class: 'custom-select mr-1')
+    = f.search_field(:title, onsearch: true, class: 'form-control mr-1')
+    = f.submit(t('.submit'), class: 'btn btn-outline-secondary')
+  = link_to t('.create_task'), new_task_path, class: 'btn btn-outline-secondary'
+%table.table.table-striped.text-center.mt-1
+  %thead.thead-dark
     %tr
-      %td 優先程度
-      %td 狀態
-      %td 任務
-      %td 開始時間
-      %td 結束時間
+      %th= Task.human_attribute_name(:priorities)
+      %th= Task.human_attribute_name(:statuses)
+      %th= Task.human_attribute_name(:title)
+      %th= Task.human_attribute_name(:start_time)
+      %th= Task.human_attribute_name(:end_time)
+      %th{colspan: 1} 
   %tbody 
     - @tasks.each do |task|
       %tr 
@@ -21,11 +24,11 @@
         %td 
           = t("tasks.model.statuses.#{task.status}")
         %td 
-          = link_to task.title, task_path(task)
+          = link_to task.title, task_path(task), class: 'text-decoration-none task-title'
         %td 
-          = task.start_time 
+          = time_format(task.start_time)
         %td 
-          = task.end_time
+          = time_format(task.end_time)
         %td 
-          = link_to t('.destroy_task'), task_path(task), method: 'delete', data: {confirm: t('.destroy_check_text')}
-= link_to t('.create_task'), new_task_path
+          = link_to t('.destroy_task'), task_path(task), method: :delete, data: {confirm: t('.destroy_check_text')}, class: 'btn btn-danger btn-sm'
+= paginate(@tasks)

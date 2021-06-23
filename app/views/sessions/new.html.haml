@@ -1,0 +1,14 @@
+.card.mt-3 
+  .card-body 
+    %h1.card-title.mb-3.p-2 登入
+    .dropdown-divider
+    .card-content
+      = form_with url: session_path, local: true, id: 'user_sign_in' do |f|
+        .form-group
+          = f.label(:name, User.human_attribute_name(:name))
+          = f.text_field(:name, class: 'form-control')
+        .form-group 
+          = f.label(:password, User.human_attribute_name(:password))
+          = f.password_field(:password, class: 'form-control')
+        .d-flex.justify-content-center.p-2
+          = f.submit t('.submit'), class: 'btn btn-outline-secondary mx-1'

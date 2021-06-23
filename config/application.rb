@@ -10,6 +10,8 @@ module TaskManage
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
+    config.exceptions_app = self.routes
+    # config.autoloader = :classic
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -22,7 +24,7 @@ module TaskManage
     # setup I18n
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :"zh-TW"
-    config.i18n.available_locales = [:"zh-TW"]
+    config.i18n.available_locales = [:"zh-TW", :en]
 
     # setup time zone
     config.time_zone = 'Taipei'
@@ -31,7 +33,12 @@ module TaskManage
     config.eager_load_paths += Dir[Rails.root.join('lib', '**/')]
 
     config.action_view.field_error_proc = proc do |html_tag, instance|
-      html_tag.html_safe
+      if html_tag.include?('input')
+        html_tag += %{<div class="invalid-feedback">#{instance.error_message.join(', ')}</div>}.html_safe
+      end
+      html_tag.gsub("form-control", "form-control is-invalid").html_safe
+
     end
+
   end
 end

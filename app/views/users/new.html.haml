@@ -1,0 +1,18 @@
+.card.mt-3 
+  .card-body 
+    %h1.card-title.mb-3.p-2 註冊帳號
+    .dropdown-divider
+    .card-content
+      = form_with model: @user, url: registers_path, local: true, id: 'user_sign_up' do |f|
+        .form-group
+          = f.label(:name, User.human_attribute_name(:name))
+          = f.text_field(:name, class: 'form-control')
+        .form-group 
+          = f.label(:password, User.human_attribute_name(:password))
+          = f.password_field(:password, class: 'form-control')
+        .form-group
+          = f.label(:password_confirmation, User.human_attribute_name(:password_confirmation))
+          = f.password_field(:password_confirmation, class: 'form-control')
+        .d-flex.justify-content-center.p-2
+          = f.submit t('.submit'), class: 'btn btn-outline-secondary mx-1'
+          = display_come_back_to_admin_root

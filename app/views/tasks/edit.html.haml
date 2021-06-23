@@ -1,3 +1,7 @@
-%h1 編輯任務
-= render 'form', task: @task
-= link_to t('.return_task'), tasks_path(@task)
+.card.mt-3 
+  .card-body 
+    %h1.card-title.mb-3.p-2 
+      = t('.title')
+    .dropdown-divider
+    .card-content
+      = render 'form', task: @task

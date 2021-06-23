@@ -1,0 +1,9 @@
+.error.text-gray-800
+  .error-icon.d-flex.justify-content-center.my-5
+    = content_tag(:i, nil, class: "fas fa-6x #{error_icon}")
+  .error-massage.text-center
+    %p.text-center 
+      = error_message
+    %p.text-center 
+      = t('errors.public.contact')
+    

@@ -2,11 +2,11 @@ class TasksController < ApplicationController
   before_action :find_task, only:[:destroy, :update, :show, :edit]
 
   def index
-    @tasks = params[:search].nil? ? Task.all : search_tasks
+    @tasks = search_tasks
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.new(task_params)
     
     if @task.save
       flash[:notice] = i18n_t('.create_successful')
@@ -42,11 +42,11 @@ class TasksController < ApplicationController
 
   private
     def task_params
-      params.require(:task).permit(:title, :notes, :end_time, :start_time, :status, :priority)
+      params.require(:task).permit(:title, :notes, :end_time, :start_time, :status, :priority, tag_ids:[])
     end
 
     def find_task
-      @task = Task.find_by(id: params[:id])
+      @task = current_user.tasks.find_by_id(params[:id])
     end
 
     def i18n_t(key)
@@ -54,15 +54,17 @@ class TasksController < ApplicationController
     end
 
     def search_params
-      params.require(:search).permit(:statuses, :sort, :title)
+      params.require(:search).permit(:statuses, :sort, :title, :tag)
     end
 
     def search_tasks
-      task = Task.all
+      task = current_user.tasks.page(params[:page])
+      return task if params[:search].nil?
       [
         {key: search_params[:statuses], scope: :search_status},
         {key: search_params[:title], scope: :search_title},
-        {key: search_params[:sort], scope: :field_sort}
+        {key: search_params[:sort], scope: :field_sort},
+        {key: search_params[:tag], scope: :search_tag}
       ].each do |val|
         next if val[:key].blank?
         task = task.try(val[:scope], val[:key])

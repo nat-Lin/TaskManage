@@ -1,0 +1,29 @@
+%h1.text-center.mt-3 使用者列表
+.search.d-flex.justify-content-between.mt-3
+  = link_to '新增使用者', new_register_path, class: 'btn btn-outline-secondary'
+%table.table.table-striped.text-center.mt-1
+  %thead.thead-dark
+    %tr
+      %th 創建時間
+      %th 使用者帳號
+      %th 使用者任務數量
+      %th 使用者權限
+      %th{colspan: 1} 
+  %tbody 
+    - @users.each do |user|
+      %tr 
+        %td 
+          = time_format(user.created_at)
+        %td 
+          = link_to user.name, admin_user_path(user), class: 'text-decoration-none'
+        %td
+          = user.tasks.count 
+        %td 
+          = form_with model: user, url: register_path(user), local: true do |f|
+            = f.select(:role, options_for_roles, {}, class: 'custom-select w-auto')
+            = f.submit('更新', class: 'btn btn-outline-secondary')
+        %td
+          - unless current_user == user
+            = link_to '刪除', register_path(user), method: :delete, data: {confirm: '確定是否刪除使用者？(該使用者創建的任務也會同時刪除！！！)'}, class: 'btn btn-danger'
+= paginate(@users)
+    

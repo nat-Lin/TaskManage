@@ -1,32 +1,36 @@
-- if task.errors.any?
-  %ul 
-    - task.errors.full_messages.each do |msg|
-      %li 
-        = msg
-
-= form_with model: task, local: true do |f|
-  .form-group
-    = f.label(:title, t('.name'))
-    = f.text_field(:title)
-
-  .form-group
-    = f.label(:notes, t('.notes'))
-    = f.text_area(:notes, cols: 40, rows: 20)
-
-  .form-group
-    = f.label(:start_time, t('.start_time'))
-    = f.datetime_field(:start_time)
-
-  .form-group
-    = f.label(:end_time, t('.end_time'))
-    = f.datetime_field(:end_time)
-
-  .form-group
-    = f.label(:status, t('.status'))
-    = f.select(:status, options_for_statuses)
-
+= form_with model: task, local: true, id: "#{action_name}_task" do |f|
   .form-group 
-    = f.label(:priority, t('.priority'))
-    = f.select(:priority, options_for_priorities)
+    %p.mb-1 Tag
+    = f.collection_check_boxes(:tag_ids, current_user.tags, :id, :name) do |tag|
+      .form-check.form-check-inline
+        = tag.check_box(class: 'form-check-input')
+        = tag.label(class: 'form-check-label')
 
-  = f.submit t(".submit.#{action_name}")
+  .form-group
+    = f.label(:title, Task.human_attribute_name(:title))
+    = f.text_field(:title, class: 'form-control')
+
+  .form-group
+    = f.label(:notes, Task.human_attribute_name(:notes))
+    = f.text_area(:notes, rows: 4, class: 'form-control')
+
+  .form-group
+    = f.label(:start_time, Task.human_attribute_name(:start_time))
+    = f.datetime_field(:start_time, class: 'form-control')
+
+  .form-group
+    = f.label(:end_time, Task.human_attribute_name(:end_time))
+    = f.datetime_field(:end_time, class: 'form-control')
+
+  .form-row
+    .form-group.col-6
+      = f.label(:status, Task.human_attribute_name(:statuses))
+      = f.select(:status, options_for_statuses, {}, class: 'form-control')
+
+    .form-group.col-6
+      = f.label(:priority, Task.human_attribute_name(:priorities))
+      = f.select(:priority, options_for_priorities, {}, class: 'form-control')
+
+  .d-flex.justify-content-center.p-2
+    = f.submit t(".submit.#{action_name}"), class: 'btn btn-outline-secondary mx-1'
+    = form_come_back_link(task)
